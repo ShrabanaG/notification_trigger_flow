@@ -1,0 +1,6 @@
+# FlowForge — Supabase local/CLI config
+# The run-workflow function is a public webhook, so JWT verification is off.
+project_id = "flowforge"
+
+[functions.run-workflow]
+verify_jwt = false
