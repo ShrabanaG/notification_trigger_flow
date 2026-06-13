@@ -1,23 +1,92 @@
-# FlowForge — Workflow Automation Builder
+# ⚡ FlowForge — Workflow Automation Builder
 
-A React + TypeScript UI for building end-to-end process automations with up to 8 configurable steps. Reduces manual workflow setup time by ~3 hours per workflow.
+**FlowForge is a full-stack, no-code workflow automation tool.** Instead of writing
+code or wiring up integrations by hand, you visually stack up to **8 configurable
+steps** — *"when this happens → filter it → transform it → notify someone"* — then
+save it, run it, and watch it execute in real time. It turns a ~3-hour manual setup
+into a few minutes of clicking.
 
-## Features
+Think of it as a focused, self-hostable alternative to Zapier or Make, built on a
+modern React + Supabase stack with a clean, animated UI and a real execution engine
+that sends actual emails and Slack messages.
+
+---
+
+## 📸 Screenshots
+
+### Login
+Secure email/password authentication — every user gets their own private workspace.
+
+![FlowForge login page](docs/screenshots/login-page.png)
+
+### Home
+A polished landing/dashboard with the value proposition and quick access to the builder.
+
+![FlowForge home page](docs/screenshots/home-page.png)
+
+> _Screenshots live in [`docs/screenshots/`](docs/screenshots/). To refresh them, run
+> the app, capture the login and home pages, and save them as `login-page.png` and
+> `home-page.png` in that folder._
+
+---
+
+## ✨ Features
 
 - **8 step types** — Trigger, Filter, Transform, Notify, Integrate, Delay, Condition, Action
 - **Inline configuration** — each step expands with type-specific fields (dropdowns, inputs)
-- **Step simulation** — animate through each step sequentially to verify the flow
-- **Save & manage** — save workflows, toggle active/paused, delete
-- **Animated UI** — Framer Motion spring animations throughout, Slack-inspired dark theme
+- **Real execution engine** — a Supabase Edge Function runs your steps and sends actual emails / Slack messages
+- **Live activity feed** — watch runs stream in real time (Supabase Realtime) with a full step-by-step log
+- **Scheduled triggers** — fire a workflow on a CRON schedule via `pg_cron`
+- **Per-user accounts** — auth + Row-Level Security, so each user only sees their own workflows
+- **Light & dark themes** — toggle with a persisted preference
+- **Accessible & responsive** — WCAG 2.0 AA, keyboard navigation, mobile bottom-nav
 
-## Tech Stack
+## 🛠 Tech Stack
 
-- React 18 + TypeScript
-- Vite
-- Framer Motion (animations)
-- Lucide React (icons)
+| Layer | Tech |
+|-------|------|
+| Frontend | React 18 + TypeScript, Vite |
+| UI / Motion | Framer Motion, Lucide icons, custom CSS |
+| Backend | Supabase (Postgres, Auth, Realtime, Edge Functions) |
+| Execution | Deno Edge Function + Resend (email) / Slack webhooks |
+| Hosting | AWS Amplify (frontend), Supabase (backend) |
 
-## Getting Started
+---
+
+## 🚀 How to Use the Product
+
+Once you're signed in, building an automation takes four steps:
+
+### 1. Sign up / Sign in
+Open the app and create an account with your email and a password. You land on the
+**Home** dashboard.
+
+### 2. Build a workflow
+- Go to **Builder** (left sidebar)
+- Give your workflow a **name** (required) and an optional description
+- Click **+ Add Step** and pick from the 8 step types — add up to 8
+- Click any step to **expand and configure** it. A typical notification flow:
+  1. **Trigger** — *when* it runs (Webhook, Schedule, Incoming Email, Form…)
+  2. **Filter** *(optional)* — only continue if a condition is met (e.g. `rating equals 1`)
+  3. **Notify** — the alert itself (Channel: Email/Slack, Recipient, Template)
+
+### 3. Simulate & Save
+- Hit **Simulate** to preview the flow — each step lights up and checks off in order
+- Hit **Save Workflow** to persist it to your account
+
+### 4. Run it & watch it live
+- Go to **Saved** — every workflow shows its steps, status, and an **Activity** panel
+- Click **Run** to fire it now. The execution log streams into the live Activity feed:
+  each step's result, success/failure, and the notification that was sent
+- Toggle a workflow **Active/Paused**, or delete it, anytime
+
+> **Tip:** A minimal "get a notification" workflow is just two steps —
+> `Trigger (Webhook) → Notify (Email, your@email.com)`. The Trigger decides *when*;
+> the Notify step *sends* the alert.
+
+---
+
+## Getting Started (local development)
 
 ```bash
 # Install dependencies
@@ -27,7 +96,8 @@ npm install
 npm run dev
 ```
 
-Visit `http://localhost:5173`
+Visit `http://localhost:5173`. You'll need to configure Supabase (below) before
+you can sign in.
 
 ## Supabase Setup (backend)
 
