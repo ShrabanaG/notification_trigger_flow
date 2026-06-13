@@ -1,26 +1,8 @@
-import { useId } from 'react';
 import type { WorkflowStep } from '../types/workflow';
 
 interface Props {
   step: WorkflowStep;
   onUpdate: (patch: Partial<WorkflowStep>) => void;
-}
-
-function Field({ label, children }: { label: string; children: React.ReactNode }) {
-  const id = useId();
-  return (
-    <div className="field-group">
-      <label htmlFor={id} className="field-label">{label}</label>
-      {/* clone child with id */}
-      {children && typeof children === 'object'
-        ? cloneWithId(children as React.ReactElement, id)
-        : children}
-    </div>
-  );
-}
-
-function cloneWithId(el: React.ReactElement, id: string) {
-  return { ...el, props: { ...el.props, id } };
 }
 
 export function StepConfig({ step, onUpdate }: Props) {

@@ -111,7 +111,7 @@ export function StepCard({ step, index, total, onRemove, onUpdate }: Props) {
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: 'auto', opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: 'easeInOut' }}
+            transition={{ duration: 0.25, ease: 'easeInOut' as const }}
             style={{ overflow: 'hidden' }}
           >
             <StepConfig step={step} onUpdate={(patch) => onUpdate(step.id, patch)} />
