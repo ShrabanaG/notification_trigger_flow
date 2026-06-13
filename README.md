@@ -24,9 +24,7 @@ A polished landing/dashboard with the value proposition and quick access to the 
 
 ![FlowForge home page](docs/screenshots/home-page.png)
 
-> _Screenshots live in [`docs/screenshots/`](docs/screenshots/). To refresh them, run
-> the app, capture the login and home pages, and save them as `login-page.png` and
-> `home-page.png` in that folder._
+
 
 ---
 
