@@ -81,3 +81,6 @@ create policy "select own runs"
       where w.id = runs.workflow_id and w.user_id = auth.uid()
     )
   );
+
+-- Stream new runs to the browser in real time (powers the live Activity feed).
+alter publication supabase_realtime add table public.runs;

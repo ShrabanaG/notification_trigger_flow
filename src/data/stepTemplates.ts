@@ -5,7 +5,7 @@ export const STEP_TEMPLATES: Record<StepType, Omit<WorkflowStep, 'id' | 'status'
     type: 'trigger',
     title: 'Trigger',
     description: 'Start the workflow when an event occurs',
-    config: { event: 'webhook', method: 'POST' },
+    config: { event: 'webhook', method: 'POST', cron: '0 9 * * *' },
     icon: '⚡',
     color: '#7C3AED',
   },

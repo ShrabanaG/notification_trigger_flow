@@ -25,14 +25,28 @@ export function StepConfig({ step, onUpdate }: Props) {
               <option value="database">Database Change</option>
             </select>
           </label>
-          <label>
-            <span className="field-label">HTTP Method</span>
-            <select className="cfg-select" value={String(cfg.method)} onChange={e => set('method', e.target.value)} aria-label="HTTP method">
-              <option value="POST">POST</option>
-              <option value="GET">GET</option>
-              <option value="PUT">PUT</option>
-            </select>
-          </label>
+          {cfg.event === 'schedule' ? (
+            <label>
+              <span className="field-label">Schedule (CRON)</span>
+              <input
+                className="cfg-input"
+                value={String(cfg.cron ?? '0 9 * * *')}
+                onChange={e => set('cron', e.target.value)}
+                placeholder="0 9 * * *"
+                aria-label="Cron schedule expression"
+              />
+              <span className="cfg-hint">min hour day month weekday · e.g. “0 9 * * *” = 9am daily</span>
+            </label>
+          ) : (
+            <label>
+              <span className="field-label">HTTP Method</span>
+              <select className="cfg-select" value={String(cfg.method)} onChange={e => set('method', e.target.value)} aria-label="HTTP method">
+                <option value="POST">POST</option>
+                <option value="GET">GET</option>
+                <option value="PUT">PUT</option>
+              </select>
+            </label>
+          )}
         </>
       )}
 
